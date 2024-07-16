@@ -1,0 +1,26 @@
+<p-progressSpinner ariaLabel="loading" *ngIf="loading$$ | async">
+</p-progressSpinner>
+
+<ng-container *ngIf="currentPokemon$ | async as pokemon">
+    <div>
+        Name: {{pokemon.name}}
+    </div>
+        <img [src]="pokemon.sprites.front_default" alt="image of {{pokemon.name}}">
+    <ul>
+       <li>
+           id: {{pokemon.id }}
+       </li>
+       <li>
+           height: {{pokemon.height }}
+       </li>
+       <li>
+           weight: {{pokemon.weight }}
+       </li>
+    </ul>
+</ng-container>
+
+<ng-container *ngIf="error$$ | async as error">
+    <p class="p-message-warn">There was an error loading: {{currentPokemonName$ | async}}</p>
+    <p>{{ error.message }}</p></ng-container
+>
+

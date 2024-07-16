@@ -22,7 +22,15 @@ type pokeApiResponse = {
 export class PokeService {
   constructor(private httpClient: HttpClient) {}
 
-  public getPokemon$(limit: number = DEFAULT_LIMIT): Observable<string[]> {
+  public getOnePokemon$(name: string) {
+    const httpRequest$ = this.httpClient.get(`${POKE_API_ROOT_POKEMON}/${name}`)
+
+    return httpRequest$.pipe(
+        tap(console.log)
+    )
+  }
+
+  public getMultiplePokemon$(limit: number = DEFAULT_LIMIT): Observable<string[]> {
     const httpRequest$ = this.httpClient.get<pokeApiResponse>(POKE_LIST_BASE, {
       params: { limit: limit },
     }); // cold observable, starts working on subscribe
