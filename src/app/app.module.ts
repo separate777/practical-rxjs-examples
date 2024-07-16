@@ -20,6 +20,9 @@ import './operators/filter/filter';
 import './operators/withLatestFrom/withLatestFrom';
 import './operators/of/of';
 import './operators/catchError/catchError';
+import './operators/delay/delay';
+import './observables/Subjects/subject';
+import './observables/Subjects/replay-subject';
 
 @NgModule({
   declarations: [AppComponent],

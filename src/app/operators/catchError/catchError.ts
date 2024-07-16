@@ -7,7 +7,7 @@ import { errorLog, interval2SecondsGreen$, logOutput } from '../../helpers';
 // https://rxjs.dev/api/operators/catchError
 
 const source1$: Observable<number> = interval2SecondsGreen$(10); // emits 0, 1 then completes
-const enabled: boolean = true;
+const enabled: boolean = false;
 if (enabled) {
   const subscription: Subscription = source1$
     .pipe(
