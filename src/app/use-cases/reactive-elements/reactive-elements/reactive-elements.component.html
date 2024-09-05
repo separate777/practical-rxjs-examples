@@ -1,0 +1,19 @@
+<input type="text" pInputText (keyup)="updateInputValue($event)" [ngModel]="inputValue$ | async">
+
+
+<input type="text" pInputText (keyup)="updateInputValue($event)" [ngModel]="inputValue$ | async">
+
+
+<p-button label="clear" (click)="clearInputValue()"></p-button>
+
+
+<div>
+  <p-toggleButton
+      pTooltip="switches between active and inactive sync of the input elements"
+      (onChange)="updateInputSync($event)"
+      [ngModel]="inputUpdateSyncActive$$ | async"
+      onLabel="input sync active"
+      offLabel="input sync inactive"/>
+</div>
+
+

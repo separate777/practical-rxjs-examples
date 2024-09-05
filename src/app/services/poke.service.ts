@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {delay, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {pokemon} from "../use-cases/accessing-route-parameters/display-pokemon-from-route/pokemon";
 
 const POKE_API_ROOT_POKEMON = 'https://pokeapi.co/api/v2/pokemon';
 const POKE_LIST_BASE = 'https://pokeapi.co/api/v2/pokemon/';
@@ -18,6 +19,7 @@ type pokeApiResponse = {
   previous: 'string';
   results: pokeEntry[];
 };
+
 @Injectable()
 export class PokeService {
   constructor(private httpClient: HttpClient) {}
@@ -25,7 +27,7 @@ export class PokeService {
   public getPokemon$(limit: number = DEFAULT_LIMIT): Observable<string[]> {
     const httpRequest$ = this.httpClient.get<pokeApiResponse>(POKE_LIST_BASE, {
       params: { limit: limit },
-    }); // cold observable, starts working on subscribe
+    });
 
     return httpRequest$.pipe(
       map((val) => {
@@ -38,7 +40,13 @@ export class PokeService {
         pokeApiResponse.results.map(
           (pokeEntry: { name: any }) => pokeEntry.name
         )
-      )
+      ),
+      delay(1000)
     );
+  }
+
+  public getOnePokemon$(name: string):Observable<pokemon> {
+    return this.httpClient.get<pokemon>(`${POKE_API_ROOT_POKEMON}/${name}`).pipe(delay(1000));
+
   }
 }

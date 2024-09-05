@@ -1,0 +1,15 @@
+.app-container {
+  padding: 1rem;
+}
+
+.nav-bar-container {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.nav-bar-button-container {
+  display: flex;
+  gap: 1rem;
+}

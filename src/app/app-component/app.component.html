@@ -1,0 +1,23 @@
+<div class="app-container">
+  <div class="nav-bar-container">
+    <app-nav-menu>
+      <app-nav-item _link="/reactive-elements">Reactive Elements</app-nav-item>
+      <app-nav-item _link="/accessing-route-parameters">Accessing Route Parameters</app-nav-item>
+      <app-nav-item _link="/component-communication">Component Communication</app-nav-item>
+      <app-nav-item _link="/http-requests">http-requests</app-nav-item>
+      <app-nav-item _link="/state-management">state-management</app-nav-item>
+      <app-nav-item _link="/reactive-forms">Reactive Forms</app-nav-item>
+    </app-nav-menu>
+    <div class="nav-bar-button-container">
+      <p-toggleButton
+          pTooltip="switches between simple and advanced versions of the examples"
+          (onChange)="onToggleExampleVersion($event)"
+          [ngModel]="exampleVersion$ | async"
+          onLabel="advanced"
+          offLabel="basic"/>
+      <p-button icon="pi pi-refresh" (click)="triggerRefresh()"></p-button>
+    </div>
+  </div>
+  <hr class="p-divider">
+  <router-outlet></router-outlet>
+</div>

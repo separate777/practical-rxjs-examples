@@ -1,0 +1,8 @@
+<ng-container *ngIf="exampleVersion$ | async as currentExampleVersion">
+  <ng-container *ngIf="currentExampleVersion === exampleVersion.BASIC">
+    <app-http-request-basic/>
+  </ng-container>
+  <ng-container *ngIf="currentExampleVersion === exampleVersion.ADVANCED">
+    <app-http-request/>
+    </ng-container>
+</ng-container>

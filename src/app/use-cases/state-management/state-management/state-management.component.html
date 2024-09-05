@@ -1,0 +1,10 @@
+
+
+<p-toggleButton
+    (onChange)="onToggleExampleVersion($event)"
+    [ngModel]="isAdvancedVersion$ | async"
+    onLabel="advanced"
+    offLabel="basic" />
+
+
+{{exampleVersion$ | async | json}}
