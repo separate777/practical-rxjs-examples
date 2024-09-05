@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {ReplaySubject} from "rxjs";
+import {Subject} from "rxjs";
 
 @Injectable()
 export class GlobalRefreshService {
 
-  private refresh$$: ReplaySubject<void> = new ReplaySubject<void>(1);
+  private refresh$$: Subject<void> = new Subject<void>();
 
   constructor() {
     this.refresh$$.next();

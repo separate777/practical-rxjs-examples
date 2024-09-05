@@ -1,9 +1,8 @@
+<h1>Http Requests Basic</h1>
 
-<!-- form element where the value changes -->
 <p-inputNumber [formControl]="limit"> </p-inputNumber>
 
 
-<!-- data to be displayed -->
 <ng-container *ngIf="pokeList$ | async as pokeList">
   <p>{{ pokeList | json }}</p>
 </ng-container>

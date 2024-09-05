@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {ExampleVersion} from "../global-state-management-module";
-import {GlobalStateService} from "../global-state.service";
+import {ExampleVersion} from "../state-management.module";
+import {StateService} from "../state.service";
 import {ToggleButtonChangeEvent} from "primeng/togglebutton";
 import {map} from "rxjs";
 
@@ -10,13 +10,13 @@ import {map} from "rxjs";
   styleUrl: './state-management.component.css'
 })
 export class StateManagementComponent {
-  public exampleVersion$ = this.globalStateService.getState$();
+  public exampleVersion$ = this.stateService.getState$();
   public isAdvancedVersion$ = this.exampleVersion$.pipe(map((version) => version === ExampleVersion.ADVANCED));
 
-  constructor(private readonly globalStateService: GlobalStateService<ExampleVersion>) {
+  constructor(private readonly stateService: StateService<ExampleVersion>) {
   }
 
   onToggleExampleVersion($event: ToggleButtonChangeEvent) {
-    this.globalStateService.setState($event.checked ? ExampleVersion.ADVANCED : ExampleVersion.BASIC);
+    this.stateService.setState($event.checked ? ExampleVersion.ADVANCED : ExampleVersion.BASIC);
   }
 }

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {ExampleVersion} from "../../state-management/global-state-management-module";
-import {GlobalStateService} from "../../state-management/global-state.service";
+import {ExampleVersion} from "../../state-management/state-management.module";
+import {StateService} from "../../state-management/state.service";
 import {Observable} from "rxjs";
 
 @Component({
@@ -10,9 +10,9 @@ import {Observable} from "rxjs";
 })
 export class HttpRequestRootComponent {
   public exampleVersion: typeof ExampleVersion = ExampleVersion;
-  public exampleVersion$: Observable<ExampleVersion> = this.globalStateService.getState$();
+  public exampleVersion$: Observable<ExampleVersion> = this.stateService.getState$();
 
-  constructor(private readonly globalStateService: GlobalStateService<ExampleVersion>) {
+  constructor(private readonly stateService: StateService<ExampleVersion>) {
   }
 
 }

@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {delay, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {pokemon} from "../use-cases/accessing-route-parameters/display-pokemon-from-route/pokemon";
+import {Pokemon} from "../use-cases/accessing-route-parameters/display-pokemon-from-route/pokemon";
 
 const POKE_API_ROOT_POKEMON = 'https://pokeapi.co/api/v2/pokemon';
 const POKE_LIST_BASE = 'https://pokeapi.co/api/v2/pokemon/';
@@ -45,8 +45,8 @@ export class PokeService {
     );
   }
 
-  public getOnePokemon$(name: string):Observable<pokemon> {
-    return this.httpClient.get<pokemon>(`${POKE_API_ROOT_POKEMON}/${name}`).pipe(delay(1000));
+  public getOnePokemon$(name: string):Observable<Pokemon> {
+    return this.httpClient.get<Pokemon>(`${POKE_API_ROOT_POKEMON}/${name}`).pipe(delay(1000));
 
   }
 }

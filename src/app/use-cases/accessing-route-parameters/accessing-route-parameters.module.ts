@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DisplayPokemonFromRouteComponent } from './display-pokemon-from-route/display-pokemon-from-route.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DisplayPokemonFromRouteComponent} from './display-pokemon-from-route/display-pokemon-from-route.component';
 import {RouterModule, Routes} from "@angular/router";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {SharedModule} from "../../shared/shared.module";
@@ -8,7 +8,8 @@ import {SharedModule} from "../../shared/shared.module";
 const routes: Routes = [
   {
     path: '',
-    component: DisplayPokemonFromRouteComponent
+    redirectTo: 'squirtle',
+    pathMatch: 'full'
   },
   {
     path: ':pokemon-name',
@@ -22,9 +23,10 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-      SharedModule,
+    SharedModule,
     CommonModule,
     ProgressSpinnerModule
   ]
 })
-export class AccessingRouteParametersModule { }
+export class AccessingRouteParametersModule {
+}

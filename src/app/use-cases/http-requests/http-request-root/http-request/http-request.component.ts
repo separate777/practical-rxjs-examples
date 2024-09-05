@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {BehaviorSubject, catchError, debounceTime, EMPTY, Observable, of, startWith, Subject, switchMap, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, debounceTime, EMPTY, map, Observable, of, startWith, Subject, switchMap, tap} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {PokeService} from "../../../../services/poke.service";
+import {GlobalRefreshService} from "../../../state-management/global-refresh.service";
 
 @Component({
   selector: 'app-http-request',
@@ -14,9 +15,12 @@ export class HttpRequestComponent {
   isLoading$$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   error$$: Subject<{ message: string } | null> = new Subject<{ message: string } | null>()
 
-  pokeList$: Observable<string | string[] | never> = this.limit.valueChanges.pipe(
-      startWith(this.limit.value),
-      debounceTime(500),
+  pokeList$: Observable<string | string[] | never> = combineLatest([
+    this.limit.valueChanges.pipe(startWith(this.limit.value), debounceTime(500)),
+    this.globalRefreshService.getRefresh$().pipe(startWith(null))
+  ])
+  .pipe(
+      map(([limit]) => limit),
       tap(() => {
         this.isLoading$$.next(true);
         this.error$$.next(null)
@@ -34,6 +38,9 @@ export class HttpRequestComponent {
               )),
       tap(() => this.isLoading$$.next(false)),
   );
-  constructor(private readonly pokeService: PokeService) {
+
+  constructor(private readonly pokeService: PokeService,
+              private readonly globalRefreshService: GlobalRefreshService) {
+
   }
 }

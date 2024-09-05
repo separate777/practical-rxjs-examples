@@ -1,1 +1,36 @@
-<p>reactive-forms works!</p>
+<h1>Reactive Forms</h1>
+<small>
+  (Doesn't react to global refresh)
+</small>
+<div>
+  <p-dropdown
+      [options]="pokemonList"
+      [formControl]="pokemonName"
+      optionLabel="name"
+      placeholder="Select a Pokemon"/>
+</div>
+
+<p-progressSpinner ariaLabel="loading" *ngIf="isLoading$$ | async">
+</p-progressSpinner>
+
+<ng-container *ngIf="currentPokemon$ | async as pokemon">
+  <ng-container *ngIf="!(isLoading$$ | async)">
+    <div>
+      Name: {{ pokemon.name }}
+    </div>
+    <img [src]="pokemon.sprites.front_default" alt="image of {{pokemon.name}}">
+    <ul>
+      <li>
+        id: {{ pokemon.id }}
+      </li>
+      <li>
+        height: {{ pokemon.height }}
+      </li>
+      <li>
+        weight: {{ pokemon.weight }}
+      </li>
+    </ul>
+  </ng-container>
+</ng-container>
+
+

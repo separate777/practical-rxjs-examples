@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
-import {catchError, combineLatest, EMPTY, map, Observable, ReplaySubject, Subject, switchMap, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, EMPTY, map, Observable, ReplaySubject, startWith, switchMap, tap} from "rxjs";
 import {PokeService} from "../../../services/poke.service";
-import {pokemon} from "./pokemon";
+import {Pokemon} from "./pokemon";
 import {GlobalRefreshService} from "../../state-management/global-refresh.service";
 
 
@@ -12,7 +12,7 @@ import {GlobalRefreshService} from "../../state-management/global-refresh.servic
   styleUrl: './display-pokemon-from-route.component.css'
 })
 export class DisplayPokemonFromRouteComponent {
-  public loading$$: Subject<boolean> = new Subject<boolean>();
+  public loading$$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public error$$: ReplaySubject<{ message: string }> = new ReplaySubject<{ message: string }>(1);
 
   public currentPokemonName$: Observable<string> = this.route.paramMap.pipe(map((paramMap: ParamMap) => {
@@ -27,7 +27,10 @@ export class DisplayPokemonFromRouteComponent {
         return EMPTY;
       }));
 
-  public currentPokemon$: Observable<pokemon> = combineLatest([this.currentPokemonName$, this.globalRefreshService.getRefresh$()])
+  public currentPokemon$: Observable<Pokemon> = combineLatest([
+    this.currentPokemonName$,
+    this.globalRefreshService.getRefresh$().pipe(startWith(null))
+  ])
   .pipe(
       map(([pokemonName, _]) => pokemonName),
       tap(() => this.loading$$.next(true)),

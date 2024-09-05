@@ -12,7 +12,6 @@ export class HttpRequestBasicComponent implements AfterViewInit {
 
   limit: FormControl<number | null> = new FormControl<number>(0);
 
-  // mapping the valueChanges stream to the data stream
   pokeList$: Observable<string[]> = this.limit.valueChanges.pipe(
       switchMap((limit) =>
           this.pokeService.getPokemon$(Number(limit))

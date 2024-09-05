@@ -1,10 +1,10 @@
 import {Observable, ReplaySubject} from "rxjs";
 import {Inject, Injectable, Optional} from "@angular/core";
-import {INIT_STATE_INJECTION_TOKEN} from "./global-state-management-module";
+import {INIT_STATE_INJECTION_TOKEN} from "./state-management.module";
 
 
 @Injectable()
-export class GlobalStateService<T> {
+export class StateService<T> {
 
   private state$$: ReplaySubject<T> = new ReplaySubject<T>(1);
 

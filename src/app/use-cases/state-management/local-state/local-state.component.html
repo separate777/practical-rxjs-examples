@@ -1,12 +1,10 @@
 <div class="default-container">
-  <h1>State Management</h1>
-  <h2>Global State:</h2>
+  <h1>Local State</h1>
   <p-toggleButton
       (onChange)="onToggleExampleVersion($event)"
       [ngModel]="isAdvancedVersion$ | async"
       onLabel="advanced"
       offLabel="basic"/>
-
-  {{ exampleVersion$ | async | json }}
-  <app-local-state/>
+  <app-local-state-child-a/>
+  <app-local-state-child-b/>
 </div>

@@ -1,0 +1,39 @@
+
+
+<div *ngIf="pokemon">
+    <div>
+      Name: {{ pokemon.name }}
+    </div>
+    <img [src]="pokemon.sprites.front_default" alt="image of {{pokemon.name}}">
+    <ul>
+      <li>
+        id: {{ pokemon.id }}
+      </li>
+      <li>
+        height: {{ pokemon.height }}
+      </li>
+      <li>
+        weight: {{ pokemon.weight }}
+      </li>
+    </ul>
+  </div>
+
+
+
+<div *ngIf="pokemon$ | async as pokemon">
+  <div>
+    Name: {{ pokemon.name }}
+  </div>
+  <img [src]="pokemon.sprites.front_default" alt="image of {{pokemon.name}}">
+  <ul>
+    <li>
+      id: {{ pokemon.id }}
+    </li>
+    <li>
+      height: {{ pokemon.height }}
+    </li>
+    <li>
+      weight: {{ pokemon.weight }}
+    </li>
+  </ul>
+</div>

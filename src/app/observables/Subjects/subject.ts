@@ -6,7 +6,7 @@ import {logOutput} from "../../helpers";
 // A special type of observable that allows values to be multicasted to many observers.
 
 
-const enabled = true;
+const enabled = false;
 if (enabled) {
   const subject = new Subject<number>();
   subject.next(0);  // This will not be logged (no subscribers yet)

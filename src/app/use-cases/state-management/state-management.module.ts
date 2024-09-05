@@ -1,10 +1,13 @@
 import {InjectionToken, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StateManagementComponent} from './state-management/state-management.component';
-import {GlobalStateService} from "./global-state.service";
+import {StateService} from "./state.service";
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {SharedModule} from "../../shared/shared.module";
 import {GlobalRefreshService} from "./global-refresh.service";
+import {LocalStateComponent} from "./local-state/local-state.component";
+import {LocalStateChildAComponent} from "./local-state/local-state-child-a/local-state-child-a.component";
+import {LocalStateChildBComponent} from "./local-state/local-state-child-b/local-state-child-b.component";
 
 export enum ExampleVersion {
   BASIC = 'BASIC',
@@ -15,7 +18,10 @@ export const INIT_STATE_INJECTION_TOKEN: InjectionToken<ExampleVersion> = new In
 
 @NgModule({
   declarations: [
-    StateManagementComponent
+    StateManagementComponent,
+    LocalStateComponent,
+    LocalStateChildAComponent,
+    LocalStateChildBComponent
   ],
   providers: [
     {
@@ -23,18 +29,18 @@ export const INIT_STATE_INJECTION_TOKEN: InjectionToken<ExampleVersion> = new In
       useValue: ExampleVersion.BASIC
     },
     {
-      provide: GlobalStateService<ExampleVersion>,
-      useClass: GlobalStateService<ExampleVersion>
+      provide: StateService<ExampleVersion>,
+      useClass: StateService<ExampleVersion>
     },
     {
       provide: GlobalRefreshService
     }
   ],
   imports: [
-      SharedModule,
+    SharedModule,
     CommonModule,
     ToggleButtonModule
   ]
 })
-export class GlobalStateManagementModule {
+export class StateManagementModule {
 }

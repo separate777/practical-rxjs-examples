@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'state-management',
     component: StateManagementComponent
+  },
+  {
+    path: 'common-pitfalls',
+    loadChildren: () => import('./common-pitfalls/common-pitfalls.module').then((m) => m.CommonPitfallsModule)
   }
 
 ];
